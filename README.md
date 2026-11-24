@@ -11,8 +11,7 @@ CPU, and fit a free Google Colab session.
 | `cross_cell_type/BiPert_cross_cell_type.ipynb` | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bach-zouk/BiPert/blob/main/cross_cell_type/BiPert_cross_cell_type.ipynb) | **Identifiability within a cell type limits transfer**: Table 7 and the paragraph on guides in Appendix F | `crispra_data/`, 0.34 GB | under 1 min | under 2 GB |
 
 Each notebook defines the model in short cells, then has one section per result. Every section ends with a table
-`paper value | recomputed | difference | OK`, and the last cell lists every check. A copy of each notebook with
-all outputs (`*.executed.ipynb`) is included.
+`paper value | recomputed | difference | OK`, and the last cell lists every check. 
 
 ## Data bundles
 
@@ -49,11 +48,13 @@ Table 2).
 
 * **Recomputed:** every number of our models (BiPert, BiPert-FS, BiPert-ID), the linear baselines of the transfer
   benchmark (source average, COMPASS-X), all metrics, bootstrap intervals, ablations and regressions.
+  
 * **Shipped as summary statistics:** the notebooks start from per-knockdown mean expression profiles and control
   cells (transfer), from per-context effect summaries plus the raw counts of the test cells (identification), and
   from per-guide mean profiles (cross cell type). The scripts that built the bundles from the public single-cell
   data are included (`build_*_bundle.py`); a reader does not need them. The identification script also needs
   the benchmark helper `fbe_common.py` (set `EXPERT_EVAL_DIR` to its folder).
+  
 * **Not recomputed:**
   * rows marked † in the paper are values published by the authors of COMPASS and ExPert, shown as quoted
     constants;
@@ -67,8 +68,10 @@ knockdown, on all 34 views.
 
 * Transfer benchmark (COMPASS's benchmark): Replogle et al. 2022 (K562, RPE1), Nadig et al. 2025 (HepG2, Jurkat),
   X-Atlas/Orion (HCT116, HEK293T).
+  
 * Identification benchmark: ExPert's benchmark of 22 datasets, rebuilt from the public cell-level data with
   ExPert's quality filters; the candidate list, folds, test cells and ExPert's released results are ExPert's.
+  
 * Cross-cell-type analysis: Southard et al., *Nature Genetics* 2025 (TF CRISPR activation in fibroblasts and
   RPE-1 cells), the authors' released per-guide mean profiles.
 
