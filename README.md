@@ -6,8 +6,8 @@ CPU, and fit a free Google Colab session.
 
 | Notebook | Open | What it reproduces | Data bundle | Runtime (2 CPU cores) | Peak memory |
 |---|---|---|---|---|---|
-| `transfer/BiPert_transfer.ipynb` | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bach-zouk/BiPert/blob/main/transfer/BiPert_transfer.ipynb) | **Perturbation transfer** (BiPert, BiPert-FS): Fig. 3, the rank ablation, the JIVE comparison and the few-shot Table 1 | `transfer_data/`, 0.23 GB | about 25 min | under 10 GB |
-| `identification/BiPert_ID_identification.ipynb` | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bach-zouk/BiPert/blob/main/identification/BiPert_ID_identification.ipynb) | **Perturbation identification** (BiPert-ID): Tables 2 to 6, Fig. S2, Tables S2 and S3, and the intervals of Appendix F, on ExPert's full benchmark | `identification_data/`, 1.5 GB | about 7 min | about 6.5 GB |
+| `BiPert-transfer/BiPert_transfer.ipynb` | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bach-zouk/BiPert/blob/main/BiPert-transfer/BiPert_transfer.ipynb) | **Perturbation transfer** (BiPert, BiPert-FS): Fig. 3, the rank ablation, the JIVE comparison and the few-shot Table 1 | `transfer_data/`, 0.23 GB | about 25 min | under 10 GB |
+| `BiPert-ID/BiPert_ID_identification.ipynb` | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bach-zouk/BiPert/blob/main/BiPert-ID/BiPert_ID_identification.ipynb) | **Perturbation identification** (BiPert-ID): Tables 2 to 6, Fig. S2, Tables S2 and S3, and the intervals of Appendix F, on ExPert's full benchmark | `identification_data/`, 1.5 GB | about 7 min | about 6.5 GB |
 | `cross_cell_type/BiPert_cross_cell_type.ipynb` | [![Open in Colab](https://colab.research.google.com/assets/colab-badge.svg)](https://colab.research.google.com/github/bach-zouk/BiPert/blob/main/cross_cell_type/BiPert_cross_cell_type.ipynb) | **Identifiability within a cell type limits transfer**: Table 7 and the paragraph on guides in Appendix F | `crispra_data/`, 0.34 GB | under 1 min | under 2 GB |
 
 Each notebook defines the model in short cells, then has one section per result. Every section ends with a table
@@ -19,8 +19,8 @@ Each notebook defines the model in short cells, then has one section per result.
 next to its notebook:
 
 ```
-transfer/transfer_data/
-identification/identification_data/
+BiPert-transfer/transfer_data/
+BiPert-ID/identification_data/
 cross_cell_type/crispra_data/
 ```
 
