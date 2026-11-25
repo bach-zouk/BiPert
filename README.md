@@ -1,7 +1,6 @@
-# BiPert: reproducing the paper's results
+# BiPert: How Far Can Linear Go? BiPert, a Unified Framework for Single-Cell Perturbation Modelling
 
-Notebooks that recompute the results of *How Far Can Linear Go? BiPert, a Unified Framework for Single-Cell
-Perturbation Modelling* from compact data bundles. They need only numpy, scipy, pandas and matplotlib, run on a
+Notebooks that recompute the results from compact data bundles. They need only numpy, scipy, pandas and matplotlib, run on a
 CPU, and fit a free Google Colab session.
 
 | Notebook | Open | What it reproduces | Data bundle | Runtime (2 CPU cores) | Peak memory |
@@ -44,26 +43,6 @@ the two lines that mount the Drive and set `DATA_DIR`.
 labelled subset (transfer: fewer random splits, a few minutes; identification: only the four cell lines of
 Table 2).
 
-## What is recomputed and what is shipped
-
-* **Recomputed:** every number of our models (BiPert, BiPert-FS, BiPert-ID), the linear baselines of the transfer
-  benchmark (source average, COMPASS-X), all metrics, bootstrap intervals, ablations and regressions.
-  
-* **Shipped as summary statistics:** the notebooks start from per-knockdown mean expression profiles and control
-  cells (transfer), from per-context effect summaries plus the raw counts of the test cells (identification), and
-  from per-guide mean profiles (cross cell type). The scripts that built the bundles from the public single-cell
-  data are included (`build_*_bundle.py`); a reader does not need them. The identification script also needs
-  the benchmark helper `fbe_common.py` (set `EXPERT_EVAL_DIR` to its folder).
-  
-* **Not recomputed:**
-  * rows marked † in the paper are values published by the authors of COMPASS and ExPert, shown as quoted
-    constants;
-  * ExPert's own results are computed from the pseudobulk ranks its authors released for the same test cells.
-    Running ExPert itself needs a GPU and its checkpoints.
-
-The identification notebook also checks that its ranks equal those of our original cluster run, knockdown by
-knockdown, on all 34 views.
-
 ## Data sources
 
 * Transfer benchmark (COMPASS's benchmark): Replogle et al. 2022 (K562, RPE1), Nadig et al. 2025 (HepG2, Jurkat),
@@ -80,4 +59,4 @@ Please cite the original datasets and benchmarks when you use the bundles.
 ## Licence
 
 The code is released under the MIT licence. The data bundles will carry their own terms, which follow those of the
-source datasets.
+source datasets. Please cite our work if you use the code/its findings.
