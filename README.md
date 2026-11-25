@@ -1,4 +1,4 @@
-# BiPert: How Far Can Linear Go? BiPert, a Unified Framework for Single-Cell Perturbation Modelling
+# BiPert: How Far Can Linear Go? a Unified Framework for Single-Cell Perturbation Modelling
 
 Notebooks that recompute the results from compact data bundles. They need only numpy, scipy, pandas and matplotlib, run on a
 CPU, and fit a free Google Colab session.
