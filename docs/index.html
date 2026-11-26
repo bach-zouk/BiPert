@@ -1,0 +1,291 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>body{margin:0}img{max-width:100%}</style>
+<title>BiPert Project Page</title>
+<meta name="description" content="BiPert: a linear framework for predicting single-cell perturbation effects in unseen cell lines and for identifying the perturbed gene from a cell's expression.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:ital,wght@0,400;0,500;0,600;1,400&family=Newsreader:opsz,wght@6..72,500;6..72,600&display=swap">
+<style>
+/* Layout: a long-form reading column with a contents rail on wide screens; tables and figures sit in the column. */
+:root {
+  --bg: #f7f9fa; --surface: #ffffff; --ink: #17232c; --muted: #586874; --rule: #d6dee3;
+  --accent: #0d6a70; --accent-ink: #ffffff; --ours: #e3f2f1; --code-bg: #eef2f4; --figure-bg: #ffffff; --bar: #9fadb7;
+  --display: "Newsreader", Georgia, "Times New Roman", serif;
+  --body: "IBM Plex Sans", "Segoe UI", Helvetica, Arial, sans-serif;
+  --mono: "IBM Plex Mono", ui-monospace, Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) { --bg: #10171b; --surface: #172127; --ink: #e4ecf0; --muted: #9aabb6; --rule: #2c3a43;
+    --accent: #63c9c4; --accent-ink: #0c1518; --ours: #1c3a3b; --code-bg: #1b262d; --figure-bg: #ffffff; --bar: #5b6c77; color-scheme: dark }
+}
+:root[data-theme="dark"] { --bg: #10171b; --surface: #172127; --ink: #e4ecf0; --muted: #9aabb6; --rule: #2c3a43;
+  --accent: #63c9c4; --accent-ink: #0c1518; --ours: #1c3a3b; --code-bg: #1b262d; --figure-bg: #ffffff; --bar: #5b6c77; color-scheme: dark }
+
+body { background: var(--bg); color: var(--ink); font-family: var(--body); font-size: 1.0625rem; line-height: 1.65; }
+.page { padding-left: max(16px, env(safe-area-inset-left, 0px)); padding-right: max(16px, env(safe-area-inset-right, 0px)); padding-block: 2.5rem 4rem; }
+.layout { display: grid; grid-template-columns: minmax(0, 46rem); justify-content: center; gap: 3rem; }
+main { min-width: 0; }
+a { color: var(--accent); text-underline-offset: 0.15em; }
+a:focus-visible, button:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; border-radius: 4px; }
+
+.toc { font-size: 0.875rem; }
+.toc-title { font-size: 0.75rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); margin: 0 0 0.6rem; }
+.toc ol { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 0.35rem 1.1rem; }
+.toc a { color: var(--muted); text-decoration: none; }
+.toc a:hover, .toc a.active { color: var(--accent); }
+.toc { border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+@media (min-width: 72rem) {
+  .layout { grid-template-columns: 12rem minmax(0, 46rem); }
+  .toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 2rem); align-self: start; border-bottom: 0; padding-bottom: 0; }
+  .toc ol { flex-direction: column; gap: 0.5rem; }
+  .toc a.active { font-weight: 600; }
+}
+
+h1, h2, h3 { font-family: var(--display); font-weight: 600; line-height: 1.2; text-wrap: balance; margin: 0; }
+h1 { font-size: clamp(1.9rem, 4.6vw, 2.75rem); letter-spacing: -0.01em; }
+h2 { font-size: 1.6rem; margin-top: 3.25rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+/* Summary has no heading, so the section itself carries the rule and spacing an h2 would have given it. */
+#summary { margin-top: 3.25rem; padding-top: 1.5rem; border-top: 1px solid var(--rule); }
+#summary > p:first-child { margin-top: 0; }
+h3 { font-size: 1.2rem; margin-top: 2rem; }
+p { margin: 0.9rem 0 0; }
+.hero p.kicker { margin: 0 0 0.7rem; font-size: 0.8rem; letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted); }
+.hero p.subtitle { margin: 0.5rem 0 0; font-size: 1.1rem; color: var(--muted); }
+.authors { display: flex; flex-wrap: wrap; gap: 0.15rem 1.2rem; margin-top: 1.1rem; font-size: 0.95rem; font-weight: 500; }
+.affiliations { display: flex; flex-direction: column; gap: 0.1rem; margin-top: 0.3rem; font-size: 0.82rem; color: var(--muted); }
+sup { font-size: 0.7em; line-height: 0; }
+.links { display: flex; flex-wrap: wrap; gap: 0.6rem; margin-top: 1.4rem; }
+.button { display: inline-flex; align-items: center; gap: 0.45rem; padding: 0.5rem 0.95rem; border-radius: 6px; font-size: 0.92rem; font-weight: 500; text-decoration: none; background: var(--accent); color: var(--accent-ink); border: 1px solid var(--accent); }
+.button.pending { background: transparent; color: var(--muted); border: 1px dashed var(--rule); }
+.button small { font-weight: 400; opacity: 0.85; }
+
+.eq { margin: 1.1rem 0 0; padding: 0.85rem 1rem; background: var(--surface); border: 1px solid var(--rule); border-radius: 6px; font-family: var(--display); font-size: 1.15rem; overflow-x: auto; white-space: nowrap; }
+.eq.terms { display: flex; align-items: flex-start; gap: 0.55rem; }
+.eq.terms .op { padding-top: 0.1rem; }
+.eq.terms .term { display: inline-flex; flex-direction: column; align-items: center; gap: 0.3rem; }
+.eq.terms .t { padding: 0.1rem 0.35rem 0.3rem; border-bottom: 1px solid var(--muted); border-radius: 0 0 6px 6px; }
+.eq.terms .u { font-family: var(--body); font-size: 0.78rem; color: var(--muted); }
+.eq .lab { font-family: var(--body); font-size: 0.8rem; color: var(--muted); margin-left: 1.2rem; }
+var { font-family: var(--display); font-style: italic; }
+
+figure { margin: 1.5rem 0 0; }
+.plate { background: var(--figure-bg); border: 1px solid var(--rule); border-radius: 6px; padding: 0.75rem; }
+.plate img { display: block; width: 100%; height: auto; }
+.pair { display: grid; grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); gap: 0.75rem; }
+figcaption, .tablenote { margin-top: 0.6rem; font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+figcaption b, .tablenote b { color: var(--ink); }
+
+.tablewrap { margin-top: 1.3rem; overflow-x: auto; }
+table { border-collapse: collapse; width: 100%; font-size: 0.93rem; font-variant-numeric: tabular-nums; }
+th, td { padding: 0.45rem 0.7rem; text-align: right; border-bottom: 1px solid var(--rule); white-space: nowrap; }
+th:first-child, td:first-child { text-align: left; }
+thead th { font-weight: 600; border-bottom: 2px solid var(--ink); }
+tr.ours td { background: var(--ours); font-weight: 500; }
+td.best { font-weight: 600; }
+
+.bars { margin-top: 1.4rem; display: grid; grid-template-columns: max-content minmax(0, 1fr); column-gap: 0.9rem; row-gap: 0.5rem; align-items: center; font-size: 0.92rem; }
+.bars .name { text-align: right; color: var(--ink); white-space: nowrap; }
+.bars .track { position: relative; height: 1.15rem; background: linear-gradient(to right, var(--rule) 1px, transparent 1px) 0 0 / calc(100% / 3.5) 100%; }
+.bars .bar { height: 100%; background: var(--bar); border-radius: 0 4px 4px 0; min-width: 2px; }
+.bars .val { position: absolute; top: 50%; transform: translateY(-50%); margin-left: 0.4rem; font-size: 0.85rem; font-variant-numeric: tabular-nums; color: var(--ink); }
+.bars .row { display: contents; }
+.bars .row.ours .bar { background: var(--accent); }
+.bars .row.ours .name, .bars .row.ours .val { font-weight: 600; }
+.bars .row:hover .bar { filter: brightness(0.92); }
+.bars .axis { position: relative; height: 1.1rem; font-size: 0.78rem; color: var(--muted); font-variant-numeric: tabular-nums; }
+.bars .axis span { position: absolute; transform: translateX(-50%); }
+.bars .axis span:first-child { transform: none; }
+@media (max-width: 30rem) { .bars { font-size: 0.82rem; column-gap: 0.5rem; } }
+details.values { margin-top: 0.9rem; font-size: 0.9rem; }
+details.values summary { cursor: pointer; color: var(--accent); }
+ul.plain { margin: 0.8rem 0 0; padding-left: 1.2rem; display: flex; flex-direction: column; gap: 0.45rem; }
+ol.steps { margin: 0.9rem 0 0; padding-left: 1.3rem; display: flex; flex-direction: column; gap: 0.5rem; }
+pre { margin: 1.1rem 0 0; padding: 0.9rem 1rem; background: var(--code-bg); border: 1px solid var(--rule); border-radius: 6px; overflow-x: auto; font-family: var(--mono); font-size: 0.85rem; line-height: 1.55; }
+code { font-family: var(--mono); font-size: 0.9em; }
+ol.refs { margin: 1rem 0 0; padding-left: 1.4rem; font-size: 0.92rem; display: flex; flex-direction: column; gap: 0.5rem; }
+footer { margin-top: 3rem; padding-top: 1.2rem; border-top: 1px solid var(--rule); font-size: 0.88rem; color: var(--muted); }
+</style>
+</head>
+<body>
+
+<div class="page"><div class="layout">
+
+<nav class="toc" aria-label="Page contents">
+  <p class="toc-title">Contents</p>
+  <ol>
+    <li><a href="#summary">Summary</a></li>
+    <li><a href="#tasks">Two tasks</a></li>
+    <li><a href="#transfer">Transfer</a></li>
+    <li><a href="#identification">Identification</a></li>
+    <li><a href="#link">A two-way link</a></li>
+    <li><a href="#references">References</a></li>
+  </ol>
+</nav>
+
+<main>
+<header class="hero">
+  <p class="kicker">Preprint, 2026</p>
+  <h1>BiPert: How Far Can Linear Go?</h1>
+  <p class="subtitle">A unified linear framework for single-cell perturbation modelling</p>
+  <div class="authors"><span>Abhishek Sharma</span><span>Aleksej Zelezniak</span></div>
+  <div class="affiliations"><span>Randall Centre for Cell &amp; Molecular Biophysics, King's College London, London, UK</span></div>
+  <div class="links">
+    <a class="button" href="https://arxiv.org/abs/2611.31227">Paper <small>arXiv</small></a>
+    <a class="button" href="https://github.com/bach-zouk/BiPert">Code and notebooks <small>GitHub</small></a>
+    <span class="button pending">Data bundles <small>link to follow</small></span>
+  </div>
+</header>
+
+<figure>
+  <div class="plate"><img src="assets/img/setups.png" alt="Diagram of the two tasks: predicting the missing entries of a knockdown-by-cell-line table, and identifying the knocked-down gene of a query cell." width="1202" height="432"></div>
+  <figcaption><b>Fig. 1: The two tasks.</b> Transfer fills in the effects of knockdowns in a new cell line. Identification goes the other way, from an observed cell to the knockdown.</figcaption>
+</figure>
+
+<section id="summary">
+  <p>Large CRISPR screens measure how thousands of gene knockdowns change the state of a cell, but only in a few cell lines. Two questions follow. Can the effect of a knockdown be predicted in a cell line where it was never measured? And, given a perturbed cell, can the gene that was knocked down be identified?</p>
+  <p>We show that one linear decomposition answers both. <b>BiPert</b> predicts effects in an unseen cell line, <b>BiPert-FS</b> adapts to a new line from as few as ten measured knockdowns, and <b>BiPert-ID</b> identifies the knocked-down gene with no training. Knockdowns whose effects transfer well between cell lines are also the easiest to identify.</p>
+</section>
+
+<section id="tasks">
+  <h2>Two tasks</h2>
+  <p><b>Transfer (forward).</b> The effects of all knockdowns are known in several source cell lines. In a new line only a few are measured. Predict the rest.</p>
+  <p><b>Identification (inverse).</b> Given the expression of a perturbed cell and the control cells of its line, rank 1,157 candidate genes by how likely each is the one knocked down. The cell line was never seen in training.</p>
+</section>
+
+<section id="transfer">
+  <h2>Transfer to an unseen cell line</h2>
+  <p>Let <var>y</var><sub><var>p</var>,ℓ</sub> be the effect of knockdown <var>p</var> in cell line ℓ: the mean expression of its cells minus the mean of that line's control cells, over <var>G</var> genes.</p>
+
+  <h3>BiPert-FS: few observed knockdowns</h3>
+  <p>With ten or twenty measured knockdowns there is too little data to fit a model for the new line from scratch. BiPert-FS starts from the average effect in the source lines, <var>ȳ</var><sub><var>p</var></sub>, and corrects it inside a basis Φ of 30 response programs:</p>
+  <div class="eq terms">
+    <span class="op"><var>ŷ</var><sub><var>p</var></sub> =</span>
+    <span class="term"><span class="t"><var>ȳ</var><sub><var>p</var></sub></span><span class="u">source average</span></span>
+    <span class="op">+</span>
+    <span class="term"><span class="t">Φ<var>b</var></span><span class="u">shift</span></span>
+    <span class="op">+</span>
+    <span class="term"><span class="t">Φ(<var>C</var> − <var>I</var>)Φ<sup>⊤</sup><var>ȳ</var><sub><var>p</var></sub></span><span class="u">rescale and mix programs</span></span>
+  </div>
+  <p>The shift <var>b</var> and the matrix <var>C</var> are fitted by ridge regression, with <var>C</var> pulled towards the identity, so with no data the model returns the source average.</p>
+
+  <h3>Results</h3>
+  <figure>
+    <div class="pair">
+      <div class="plate"><img src="assets/img/transfer_bars.png" alt="Bar chart of transfer accuracy on four held-out cell lines for BiPert and published methods." width="909" height="631"></div>
+      <div class="plate"><img src="assets/img/transfer_bars_orion.png" alt="Bar chart of transfer accuracy on the Orion pair of cell lines." width="909" height="631"></div>
+    </div>
+    <figcaption><b>Fig. 2: Transfer accuracy</b> on the four held-out lines (left) and the Orion pair (right). Bars marked † are values published by the authors of the compared methods.</figcaption>
+  </figure>
+  <details class="values"><summary>Show the few-shot numbers as a table</summary>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Knockdowns observed in the new line</th><th>10</th><th>25</th><th>50</th><th>100</th></tr></thead>
+    <tbody>
+      <tr><td>Source average</td><td>0.320</td><td>0.320</td><td>0.320</td><td>0.320</td></tr>
+      <tr><td>COMPASS-X</td><td>0.322</td><td>0.355</td><td class="best">0.364</td><td>0.370</td></tr>
+      <tr class="ours"><td>BiPert (rank 30)</td><td>0.332</td><td>0.351</td><td class="best">0.369</td><td class="best">0.395</td></tr>
+      <tr class="ours"><td>BiPert-FS</td><td class="best">0.355</td><td class="best">0.361</td><td>0.362</td><td>0.366</td></tr>
+    </tbody>
+  </table></div>
+  <p class="tablenote"><b>Few-shot transfer.</b> De-biased Pearson correlation, mean of four held-out lines and five random splits (standard deviation across splits about 0.012). BiPert-FS leads with 10 and 25 observations; BiPert leads at 100.</p>
+  </details>
+</section>
+
+<section id="identification">
+  <h2>Identifying the knocked-down gene</h2>
+  <h3>BiPert-ID: training-free identification</h3>
+  <ol class="steps">
+    <li><b>Prototype.</b> For each knockdown, take its effect in every training line, remove the response that all knockdowns of that line share, and average across lines.</li>
+    <li><b>Query.</b> Take the cell's change relative to its line's controls and remove the response shared by the query cells.</li>
+    <li><b>Score.</b> Add two standardised signals: the cosine between the query and the prototype, and the drop in expression of the candidate gene itself.</li>
+  </ol>
+
+  <h3>Results</h3>
+  <div class="bars" role="img" aria-label="Bar chart of top-10 recall on four held-out cell lines. BiPert-ID 0.656, ExPert 0.540, centroid 0.30, RNA fingerprinting 0.22, own-gene drop 0.18, GenePert 0.06, scGPT 0.04, GEARS 0.01.">
+    <div class="row ours" title="BiPert-ID (ours): top-10 recall 0.656, MRR 0.521"><span class="name">BiPert-ID (ours)</span><div class="track"><div class="bar" style="width:93.71%"></div><span class="val" style="left:93.71%">0.656</span></div></div>
+    <div class="row" title="ExPert†: top-10 recall 0.540, MRR 0.402"><span class="name">ExPert†</span><div class="track"><div class="bar" style="width:77.14%"></div><span class="val" style="left:77.14%">0.540</span></div></div>
+    <div class="row" title="Centroid†: top-10 recall 0.30, MRR 0.20"><span class="name">Centroid†</span><div class="track"><div class="bar" style="width:42.86%"></div><span class="val" style="left:42.86%">0.30</span></div></div>
+    <div class="row" title="RNA fingerprinting†: top-10 recall 0.22, MRR 0.14"><span class="name">RNA fingerprinting†</span><div class="track"><div class="bar" style="width:31.43%"></div><span class="val" style="left:31.43%">0.22</span></div></div>
+    <div class="row" title="Own-gene drop only†: top-10 recall 0.18, MRR 0.16"><span class="name">Own-gene drop only†</span><div class="track"><div class="bar" style="width:25.71%"></div><span class="val" style="left:25.71%">0.18</span></div></div>
+    <div class="row" title="GenePert†: top-10 recall 0.06, MRR 0.03"><span class="name">GenePert†</span><div class="track"><div class="bar" style="width:8.57%"></div><span class="val" style="left:8.57%">0.06</span></div></div>
+    <div class="row" title="scGPT†: top-10 recall 0.04, MRR 0.02"><span class="name">scGPT†</span><div class="track"><div class="bar" style="width:5.71%"></div><span class="val" style="left:5.71%">0.04</span></div></div>
+    <div class="row" title="GEARS†: top-10 recall 0.01, MRR 0.01"><span class="name">GEARS†</span><div class="track"><div class="bar" style="width:1.43%"></div><span class="val" style="left:1.43%">0.01</span></div></div>
+    <span></span><div class="axis"><span style="left:0.00%">0</span><span style="left:28.57%">0.2</span><span style="left:57.14%">0.4</span><span style="left:85.71%">0.6</span></div>
+  </div>
+  <p class="tablenote"><b>Fig. 3: Top-10 recall on four held-out cell lines</b> (HepG2, Jurkat, K562, RPE1): the share of knockdowns whose true gene is ranked in the top 10 of 1,157 candidates, pseudobulk per knockdown. †Values released by ExPert's authors with their benchmark, averaged over the four lines.</p>
+  <details class="values"><summary>Show the values as a table, with MRR</summary>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Four held-out cell lines</th><th>Top-10 recall</th><th>MRR</th></tr></thead>
+    <tbody>
+      <tr><td>GEARS†</td><td>0.01</td><td>0.01</td></tr>
+      <tr><td>scGPT†</td><td>0.04</td><td>0.02</td></tr>
+      <tr><td>GenePert†</td><td>0.06</td><td>0.03</td></tr>
+      <tr><td>Own-gene drop only†</td><td>0.18</td><td>0.16</td></tr>
+      <tr><td>RNA fingerprinting†</td><td>0.22</td><td>0.14</td></tr>
+      <tr><td>Centroid†</td><td>0.30</td><td>0.20</td></tr>
+      <tr><td>ExPert†</td><td>0.540</td><td>0.402</td></tr>
+      <tr class="ours"><td>BiPert-ID</td><td class="best">0.656</td><td class="best">0.521</td></tr>
+    </tbody>
+  </table></div>
+  </details>
+</section>
+
+<section id="link">
+  <h2>A two-way link between transfer and identification</h2>
+  <p>Recognising a knockdown in a new cell line is like recognising a person by their voice in a new room. If someone's voice sounds the same in every room you have heard them in, you will know them in a new one. If it sounds different each time, you won't, whatever method you use.</p>
+
+  <h3>Transfer predicts identification</h3>
+  <p><i>Think of each knockdown as having a signature: the pattern of gene changes it causes.</i> Knockdowns with a consistent signature across cell lines are the ones that are easy to recognise in a new cell line.</p>
+  <ol class="steps">
+    <li><b>Give each knockdown a transfer score, using the training lines only.</b></li>
+    <li><b>Sort the knockdowns into four equal groups by that score</b>, from the lowest transfer score to the highest.</li>
+    <li><b>Go to the held-out line and count how often each group is identified.</b> For each knockdown, take its cells in the new line and ask the method to name the gene. It counts as a success if the true gene is among the top 10 guesses.</li>
+  </ol>
+  <div class="tablewrap"><table>
+    <thead><tr><th>Transfer score</th><th>ExPert</th><th>BiPert-ID</th></tr></thead>
+    <tbody>
+      <tr><td>Lowest quarter</td><td>19%</td><td>26%</td></tr>
+      <tr><td>Second</td><td>39%</td><td>59%</td></tr>
+      <tr><td>Third</td><td>65%</td><td>82%</td></tr>
+      <tr><td>Highest quarter</td><td>90%</td><td>95%</td></tr>
+    </tbody>
+  </table></div>
+  <p class="tablenote">Share of knockdowns identified in the top 10 in the held-out line, four held-out cell lines.</p>
+
+  <h3>Identification limits transfer</h3>
+  <p>In an <a href="https://doi.org/10.1038/s41588-025-02284-1">independent screen</a> that activates 1,833 transcription factors in fibroblasts and in RPE-1 cells, a factor that can be identified within both cell types usually transfers between them (25 of 33): its profile in one cell type picks it out among all factors in the other. One that can be identified within neither almost never transfers (8 of 1,720).</p>
+</section>
+
+<section id="references">
+  <h2>References</h2>
+  <ol class="refs">
+    <li>Sharma A., Zelezniak A. How Far Can Linear Go? BiPert, a Unified Framework for Single-Cell Perturbation Modelling. <a href="https://arxiv.org/abs/2611.31227">arXiv:2611.31227</a>, 2026.</li>
+    <li>Ahlmann-Eltze C., Huber W., Anders S. <a href="https://doi.org/10.1038/s41592-025-02772-6">Deep-learning-based gene perturbation effect prediction does not yet outperform simple linear baselines</a>. Nature Methods, 2025.</li>
+    <li>Liang H., Singh R. <a href="https://doi.org/10.64898/2026.08.03.742643">COMPASS: Component-Wise Inference of Shared and Gene-Specific Perturbation Response</a>. bioRxiv, 2026.</li>
+    <li>Schwartz L. et al. <a href="https://doi.org/10.64898/2026.11.02.762549">ExPert infers causal perturbations from cell states across biological and clinical contexts</a>. bioRxiv, 2026.</li>
+    <li>Southard K. M. et al. <a href="https://doi.org/10.1038/s41588-025-02284-1">Comprehensive transcription factor perturbations recapitulate fibroblast transcriptional states</a>. Nature Genetics, 2025.</li>
+  </ol>
+</section>
+
+<footer>BiPert · <a href="https://github.com/bach-zouk/BiPert">Code and notebooks</a></footer>
+</main>
+</div></div>
+
+<script>
+(function () {
+  var links = [].slice.call(document.querySelectorAll('.toc a'));
+  if ('IntersectionObserver' in window) {
+    var io = new IntersectionObserver(function (entries) {
+      entries.forEach(function (e) {
+        if (e.isIntersecting) links.forEach(function (a) { a.classList.toggle('active', a.getAttribute('href') === '#' + e.target.id); });
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+    [].forEach.call(document.querySelectorAll('main section[id]'), function (s) { io.observe(s); });
+  }
+})();
+</script>
+</body>
+</html>
